@@ -40,6 +40,7 @@ export default function QuizPage() {
       console.log({ data });
 
       // Ambil array questions dari API
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const raw: any[] = Array.isArray(data?.questions) ? data.questions : [];
 
       // Sanitasi bentuk data (AI kadang nakal 😅)
@@ -74,6 +75,7 @@ export default function QuizPage() {
 
       // Timer: 30 detik per soal (silakan ubah sesuai selera)
       setTimeLeft(sanitized.length * 30);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       console.error(e);
       setErr("Gagal mengambil/parse soal dari API.");
@@ -118,18 +120,43 @@ export default function QuizPage() {
     setCurrentIndex((i) => Math.min(questions.length - 1, i + 1));
   }
 
-  function handleSubmit() {
+  function calculateScore() {
+    const norm = (s: string) => s?.trim().toLowerCase();
+    return answers.reduce((acc, ans, i) => {
+      if (ans && questions[i] && norm(ans) === norm(questions[i].answer)) {
+        return acc + 1;
+      }
+      return acc;
+    }, 0);
+  }
+
+  async function handleSubmit() {
+    const finalScore = calculateScore();
     setSubmitted(true);
+
+    try {
+      const res = await fetch("/api/scores", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          game: "quiz",
+          tema,
+          difficulty,
+          score: finalScore,
+        }),
+      });
+      const data = await res.json();
+      console.log("score saved:", data);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const score = useMemo(() => {
     if (!submitted) return 0;
-    const norm = (s: string) => s?.trim().toLowerCase();
-    return answers.reduce((acc, ans, i) => {
-      if (ans && questions[i] && norm(ans) === norm(questions[i].answer))
-        return acc + 1;
-      return acc;
-    }, 0);
+    return calculateScore();
   }, [submitted, answers, questions]);
 
   return (

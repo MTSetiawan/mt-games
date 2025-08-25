@@ -64,7 +64,7 @@ export default function QuizMenu() {
             <p className="text-gray-600 mb-4">{tema.desc}</p>
             <Link
               className="w-32"
-              href={`/quiz/${tema.id}?difficulty=${difficulty}`}
+              href={`/minigames/quiz/${tema.id}?difficulty=${difficulty}`}
             >
               <button className="mt-auto bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 w-full cursor-pointer">
                 Mulai Quiz

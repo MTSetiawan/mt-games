@@ -2,8 +2,8 @@ import { cookies } from "next/headers";
 
 const cookieName = "token";
 
-export function setAuthCookie(token: string) {
-  cookies().set({
+export async function setAuthCookie(token: string) {
+  (await cookies()).set({
     name: cookieName,
     value: token,
     httpOnly: true,
@@ -14,12 +14,13 @@ export function setAuthCookie(token: string) {
   });
 }
 
-export function getAuthCookie() {
-  return cookies().get(cookieName)?.value || null;
+export async function getAuthCookie() {
+  const cookieJar = await cookies();
+  return cookieJar.get(cookieName)?.value || null;
 }
 
-export function clearAuthCookie() {
-  cookies().set({
+export async function clearAuthCookie() {
+  (await cookies()).set({
     name: cookieName,
     value: "",
     httpOnly: true,

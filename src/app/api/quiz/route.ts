@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
     let raw = Array.isArray(output) ? output.join("") : String(output);
 
     // ambil hanya isi array JSON
-    const match = raw.match(/\[.*\]/s);
+    const match = raw.match(/\[([^\]]|\n)*\]/);
     if (!match) throw new Error("Tidak ada JSON valid di output");
     raw = match[0];
 
@@ -43,7 +43,7 @@ export async function GET(req: NextRequest) {
 
     // perbaikan "options": "a, b, c" jadi array
     raw = raw.replace(/"options":\s*"(.*?)"/g, (match, p1) => {
-      const arr = p1.split(",").map((s) => `"${s.trim()}"`);
+      const arr = p1.split(",").map((s: string) => `"${s.trim()}"`);
       return `"options": [${arr.join(", ")}]`;
     });
 

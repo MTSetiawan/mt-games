@@ -30,7 +30,7 @@ const LoginForm = ({ onSwitch }: Props) => {
       return;
     }
     await new Promise((resolve) => setTimeout(resolve, 200));
-    router.push("/minigames");
+    router.replace("/minigames");
   };
   return (
     <form onSubmit={handleLogin} className="space-y-4">

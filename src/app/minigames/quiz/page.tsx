@@ -1,5 +1,6 @@
 "use client";
 
+import Leaderboard from "@/component/Leaderboard/LeaderBoardPage";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -72,7 +73,6 @@ export default function QuizMenu() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-      {/* Animated background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
         <div className="absolute top-40 right-20 w-1 h-1 bg-pink-400 rounded-full animate-ping"></div>
@@ -98,7 +98,6 @@ export default function QuizMenu() {
       </div>
 
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-6">
-        {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent mb-4">
             🧠 Quiz Challenge
@@ -107,7 +106,6 @@ export default function QuizMenu() {
             Test your knowledge across different topics and challenge yourself!
           </p>
 
-          {/* Difficulty Selector */}
           <div className="bg-slate-800/40 backdrop-blur-lg border border-purple-500/20 rounded-2xl p-6 max-w-md mx-auto">
             <label className="block text-white font-semibold mb-4 flex items-center justify-center gap-2">
               <span>⚙️</span>
@@ -145,7 +143,6 @@ export default function QuizMenu() {
           </div>
         </div>
 
-        {/* Topics Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full">
           {temaList.map((tema, index) => (
             <div
@@ -153,7 +150,6 @@ export default function QuizMenu() {
               className="bg-slate-800/40 backdrop-blur-lg border border-purple-500/20 rounded-2xl p-6 hover:border-purple-400/40 transform hover:scale-105 transition-all duration-300 cursor-pointer group relative overflow-hidden"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              {/* Background gradient overlay */}
               <div
                 className={`absolute inset-0 bg-gradient-to-br ${tema.color} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}
               ></div>
@@ -193,14 +189,12 @@ export default function QuizMenu() {
                 </div>
               </div>
 
-              {/* Decorative corner elements */}
               <div className="absolute top-2 right-2 w-2 h-2 bg-purple-400/30 rounded-full group-hover:bg-purple-400/60 transition-colors"></div>
               <div className="absolute bottom-2 left-2 w-1 h-1 bg-pink-400/30 rounded-full group-hover:bg-pink-400/60 transition-colors"></div>
             </div>
           ))}
         </div>
 
-        {/* Stats Section */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl w-full">
           <div className="bg-slate-800/40 backdrop-blur-lg border border-purple-500/20 rounded-xl p-6 text-center">
             <div className="text-3xl mb-2">📚</div>
@@ -236,6 +230,9 @@ export default function QuizMenu() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="relative z-10 mt-20 w-full flex justify-center">
+        <Leaderboard />
       </div>
     </div>
   );

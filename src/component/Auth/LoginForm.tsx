@@ -55,9 +55,6 @@ const LoginForm = ({ onSwitch }: Props) => {
         />
       </div>
       <button
-        type="submit"
-        className="w-full p-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-pink-700 transform hover:scale-[1.02] transition-all duration-200 shadow-lg hover:shadow-purple-500/25"
-      >
         Start Playing
       </button>
       <p className="text-center text-sm text-gray-400">
@@ -74,3 +71,4 @@ const LoginForm = ({ onSwitch }: Props) => {
 };
 
 export default LoginForm;
+

@@ -32,7 +32,6 @@ export async function GET(req: NextRequest) {
     });
 
     let raw = Array.isArray(output) ? output.join("") : String(output);
-    console.log("🔍 Raw output:", raw);
 
     const match = raw.match(/\[[\s\S]*\]/);
     if (!match) throw new Error("Tidak ada JSON valid di output");

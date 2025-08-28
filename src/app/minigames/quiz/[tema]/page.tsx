@@ -38,7 +38,6 @@ export default function QuizPage() {
       );
 
       const data = await res.json();
-      console.log({ data });
 
       const raw: any[] = Array.isArray(data?.questions) ? data.questions : [];
 
@@ -139,7 +138,6 @@ export default function QuizPage() {
         }),
       });
       const data = await res.json();
-      console.log("score saved:", data);
     } catch (error) {
       console.error(error);
     }

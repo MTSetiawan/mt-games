@@ -40,7 +40,7 @@ export async function POST(req: Request) {
 
     const token = signJwt({ sub: user.id, email: user.email, name: user.name });
 
-    setAuthCookie(token);
+    await setAuthCookie(token);
 
     return NextResponse.json({
       user: { id: user.id, name: user.name, email: user.email },

@@ -20,7 +20,7 @@ const RegisterForm = ({ onSwitch }: Props) => {
       credentials: "include",
     });
     const data = await res.json();
-    alert(data.message);
+    alert(`Register Berhasil, silakan login!`);
     return data;
   };
   return (

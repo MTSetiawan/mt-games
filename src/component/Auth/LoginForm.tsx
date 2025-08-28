@@ -24,14 +24,17 @@ const LoginForm = ({ onSwitch }: Props) => {
       body: JSON.stringify({ email, password }),
       credentials: "include",
     });
+
     const data = await res.json();
     if (!res.ok) {
-      setError(data.error);
+      setError(data.error || "Login failed");
       return;
     }
+
     await new Promise((resolve) => setTimeout(resolve, 200));
     router.replace("/minigames");
   };
+
   return (
     <form onSubmit={handleLogin} className="space-y-4">
       <div>
@@ -54,12 +57,20 @@ const LoginForm = ({ onSwitch }: Props) => {
           required
         />
       </div>
+
+      {error && <p className="text-red-400 text-sm">{error}</p>}
+
       <button
+        type="submit"
+        className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
+      >
         Start Playing
       </button>
+
       <p className="text-center text-sm text-gray-400">
         New player?{" "}
         <button
+          type="button"
           onClick={onSwitch}
           className="text-purple-400 hover:text-purple-300 font-medium transition-colors"
         >
@@ -71,4 +82,3 @@ const LoginForm = ({ onSwitch }: Props) => {
 };
 
 export default LoginForm;
-

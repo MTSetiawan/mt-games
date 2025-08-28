@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
@@ -6,7 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 type Question = {
   question: string;
   options: string[];
-  answer: string; // jawaban benar (harus salah satu dari options)
+  answer: string;
 };
 
 export default function QuizPage() {
@@ -19,10 +20,9 @@ export default function QuizPage() {
   const [err, setErr] = useState<string | null>(null);
   const params = useParams();
   const searchParams = useSearchParams();
-  const tema = params.tema; // dari dynamic route [tema]
+  const tema = params.tema;
   const difficulty = searchParams.get("difficulty") || "medium";
 
-  // Ambil soal dari API
   async function loadQuestions() {
     setLoading(true);
     setErr(null);
@@ -38,16 +38,11 @@ export default function QuizPage() {
       );
 
       const data = await res.json();
-      console.log({ data });
 
-      // Ambil array questions dari API
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const raw: any[] = Array.isArray(data?.questions) ? data.questions : [];
 
-      // Sanitasi bentuk data (AI kadang nakal 😅)
       const sanitized: Question[] = raw
         .map((q, i) => {
-          // pastikan options = string[]
           let opts: string[] = Array.isArray(q?.options)
             ? q.options
             : typeof q?.options === "string"
@@ -58,7 +53,6 @@ export default function QuizPage() {
           const question = String(q?.question ?? `Soal ${i + 1}`).trim();
           const answerRaw = String(q?.answer ?? "").trim();
 
-          // pastikan answer ada di options (bandingkan case-insensitive)
           const normalized = (s: string) => s.trim().toLowerCase();
           const fixedAnswer =
             opts.find((o) => normalized(o) === normalized(answerRaw)) ??
@@ -74,12 +68,10 @@ export default function QuizPage() {
       setQuestions(sanitized);
       setAnswers(Array(sanitized.length).fill(null));
 
-      // Timer: 30 detik per soal (silakan ubah sesuai selera)
       setTimeLeft(sanitized.length * 30);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       console.error(e);
-      setErr("Gagal mengambil/parse soal dari API.");
+      setErr("Gagal mengambil soal, Silahkan refersh halaman.");
       setQuestions([]);
       setAnswers([]);
       setTimeLeft(0);
@@ -88,18 +80,15 @@ export default function QuizPage() {
     }
   }
 
-  // Timer global
   useEffect(() => {
     if (submitted || questions.length === 0) return;
     if (timeLeft <= 0) {
-      handleSubmit(); // auto-submit saat habis
-      return;
+      handleSubmit();
     }
     const id = setInterval(() => setTimeLeft((t) => t - 1), 1000);
     return () => clearInterval(id);
   }, [timeLeft, submitted, questions.length]);
 
-  // Navigasi & pilih jawaban
   const current = questions[currentIndex];
   const totalTime = questions.length * 30 || 1;
   const progress = Math.max(
@@ -108,7 +97,7 @@ export default function QuizPage() {
   );
 
   function pickOption(opt: string) {
-    if (submitted) return; // setelah submit tidak bisa ubah
+    if (submitted) return;
     const next = answers.slice();
     next[currentIndex] = opt;
     setAnswers(next);
@@ -149,7 +138,6 @@ export default function QuizPage() {
         }),
       });
       const data = await res.json();
-      console.log("score saved:", data);
     } catch (error) {
       console.error(error);
     }
@@ -190,7 +178,6 @@ export default function QuizPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-      {/* Animated background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
         <div className="absolute top-40 right-20 w-1 h-1 bg-pink-400 rounded-full animate-ping"></div>
@@ -216,7 +203,6 @@ export default function QuizPage() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto p-6">
-        {/* Header */}
         <div className="bg-slate-800/40 backdrop-blur-lg border border-purple-500/20 rounded-2xl p-6 mb-6">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div>
@@ -387,10 +373,8 @@ export default function QuizPage() {
           </div>
         )}
 
-        {/* Results */}
         {submitted && (
           <div className="space-y-6">
-            {/* Score Card */}
             <div className="bg-slate-800/40 backdrop-blur-lg border border-purple-500/20 rounded-2xl p-8 text-center">
               <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full mb-6">
                 <span className="text-4xl">🏆</span>
@@ -440,7 +424,6 @@ export default function QuizPage() {
               </Link>
             </div>
 
-            {/* Review */}
             <div className="bg-slate-800/40 backdrop-blur-lg border border-purple-500/20 rounded-2xl p-8">
               <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                 <span>📋</span>
@@ -498,7 +481,6 @@ export default function QuizPage() {
           </div>
         )}
 
-        {/* Empty State */}
         {!questions.length && !loading && !err && (
           <div className="bg-slate-800/40 backdrop-blur-lg border border-purple-500/20 rounded-2xl p-12 text-center">
             <div className="text-6xl mb-6">🧠</div>

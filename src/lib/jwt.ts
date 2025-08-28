@@ -1,7 +1,6 @@
 import { sign, verify } from "jsonwebtoken";
 
 const secret = process.env.JWT_SECRET!;
-console.log({ secret });
 
 export type JWTPayload = {
   sub: string;

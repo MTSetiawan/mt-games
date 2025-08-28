@@ -33,11 +33,11 @@ const LandingPage: React.FC = () => {
     },
     {
       id: 2,
-      name: "Tetris Blocks",
+      name: "Lorem",
       icon: "🧩",
-      description: "Addictive puzzle block game",
+      description: "Lorem ipsum",
       difficulty: "Medium",
-      link: "/minigames/tetris",
+      link: "/minigames",
     },
   ];
 
@@ -61,7 +61,6 @@ const LandingPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-      {/* Animated background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
         <div className="absolute top-40 right-20 w-1 h-1 bg-pink-400 rounded-full animate-ping"></div>
@@ -86,7 +85,6 @@ const LandingPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Header */}
       <header className="relative z-10 p-6">
         <nav className="flex justify-between items-center max-w-6xl mx-auto">
           <div className="flex items-center space-x-3">
@@ -116,7 +114,6 @@ const LandingPage: React.FC = () => {
         </nav>
       </header>
 
-      {/* Hero Section */}
       <section className="relative z-10 text-center py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-6xl font-bold text-white mb-6 leading-tight">
@@ -147,7 +144,6 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Featured Games */}
       <section className="relative z-10 py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -192,9 +188,11 @@ const LandingPage: React.FC = () => {
                     </span>
                   </div>
 
-                  <button className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-pink-700 transform hover:scale-[1.02] transition-all duration-200 shadow-lg hover:shadow-purple-500/25">
-                    Play Now
-                  </button>
+                  <Link href={game.link}>
+                    <button className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-pink-700 transform hover:scale-[1.02] transition-all duration-200 shadow-lg hover:shadow-purple-500/25">
+                      Play Now
+                    </button>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -202,7 +200,6 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Features Section */}
       <section className="relative z-10 py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -231,7 +228,6 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="relative z-10 py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <div className="bg-slate-800/40 backdrop-blur-lg border border-purple-500/20 rounded-3xl p-12">
@@ -257,7 +253,6 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="relative z-10 py-8 px-6 border-t border-purple-500/20">
         <div className="max-w-6xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-3 mb-4">

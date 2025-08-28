@@ -26,7 +26,7 @@ const MiniGamesPage = () => {
       difficulty: "Medium",
       description: "Lorem ipsum dolor sit amet.",
       featured: true,
-      tags: ["lorem", "ipsum"], // Added tags property
+      tags: ["lorem", "ipsum"],
       link: "/minigames",
     },
   ];
@@ -57,7 +57,6 @@ const MiniGamesPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-      {/* Animated background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
         <div className="absolute top-40 right-20 w-1 h-1 bg-pink-400 rounded-full animate-ping"></div>
@@ -83,7 +82,6 @@ const MiniGamesPage = () => {
       </div>
 
       <div className="relative z-10 p-6 max-w-7xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent mb-4">
             🎮 Mini Games
@@ -93,7 +91,6 @@ const MiniGamesPage = () => {
             instantly!
           </p>
 
-          {/* Search Bar */}
           <div className="max-w-md mx-auto mb-8">
             <input
               type="text"
@@ -142,7 +139,6 @@ const MiniGamesPage = () => {
           ))}
         </div>
 
-        {/* No games found message */}
         {filteredGames.length === 0 && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">🎮</div>
@@ -165,7 +161,6 @@ const MiniGamesPage = () => {
         )}
       </div>
 
-      {/* Quick Stats */}
       <div className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="bg-slate-800/40 backdrop-blur-lg border border-purple-500/20 rounded-xl p-6 text-center">
           <div className="text-3xl mb-2">🎮</div>
@@ -174,12 +169,12 @@ const MiniGamesPage = () => {
         </div>
         <div className="bg-slate-800/40 backdrop-blur-lg border border-purple-500/20 rounded-xl p-6 text-center">
           <div className="text-3xl mb-2">👥</div>
-          <div className="text-2xl font-bold text-white">15.2K+</div>
+          <div className="text-2xl font-bold text-white">12345</div>
           <div className="text-gray-400 text-sm">Active Players</div>
         </div>
         <div className="bg-slate-800/40 backdrop-blur-lg border border-purple-500/20 rounded-xl p-6 text-center">
           <div className="text-3xl mb-2">⭐</div>
-          <div className="text-2xl font-bold text-white">4.7</div>
+          <div className="text-2xl font-bold text-white">⭐</div>
           <div className="text-gray-400 text-sm">Average Rating</div>
         </div>
         <div className="bg-slate-800/40 backdrop-blur-lg border border-purple-500/20 rounded-xl p-6 text-center">
